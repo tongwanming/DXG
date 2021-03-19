@@ -63,6 +63,8 @@ public class MainPanel : SceneBase, IBeginDragHandler, IDragHandler, IEndDragHan
 
     #region 数据定义
 
+    private const int SHOW_RED_BALL_NUMBER = 10;
+    
     private RectTransform m_Btn_DragArea;
     private RectTransform m_Center;
     private RectTransform m_DownBorder;
@@ -91,6 +93,7 @@ public class MainPanel : SceneBase, IBeginDragHandler, IDragHandler, IEndDragHan
     private TMP_Text m_TotalMoney;
     private GameObject BorderDeath;
     private Transform RemoveObjTips;
+    private ButtonEx m_Read;
     private bool isNetwork;
     private float utime = 1;//计时
     public Queue<Transform> Boom = new Queue<Transform>();
@@ -281,7 +284,7 @@ public class MainPanel : SceneBase, IBeginDragHandler, IDragHandler, IEndDragHan
             else
             {
                 composite_ball_number++;
-                if (composite_ball_number == 10)
+                if (composite_ball_number == SHOW_RED_BALL_NUMBER)
                 {
                     if (Config.Instance.isLevelShow)
                     {
@@ -380,22 +383,13 @@ public class MainPanel : SceneBase, IBeginDragHandler, IDragHandler, IEndDragHan
     {
         if (m_AllRed.childCount < 1)
         {
-            ButtonEx m_Read = ObjectPool.Instance.Spawn<ButtonEx>("RedEnvelope", m_AllRed);
+            m_Read = ObjectPool.Instance.Spawn<ButtonEx>("RedEnvelope", m_AllRed);
             m_Read.transform.localPosition(Vector3.zero).localScale(1);
             m_Read.onLeftClick = go =>
             {
                 if (AdManager.Instance.IsRewardedAvailable())
                 {
-                    AdManager.OnRewardedAdRewardedEvent -= null;
-                    AdManager.OnRewardedAdRewardedEvent += tag =>
-                    {
-                        ThreadManager.Instance.runOnMainThread(() =>
-                        {
-                            ObjectPool.Instance.DestorySpawn(m_Read.gameObject);
-                            PanelMgr.GetInstance.ShowPanel(PanelName.RedBagPanel, RedBagPanel.INDEX_OPEN);
-                        });
-                    };
-                    AdManager.Instance.ShowRewardedWithTag();
+                    AdManager.Instance.ShowRewardedWithTag("CreatRed");
                 }
                 LogUtils.Log(LogUtils.LogColor.Yellow, "点击悬浮球");
             };
@@ -694,29 +688,46 @@ public class MainPanel : SceneBase, IBeginDragHandler, IDragHandler, IEndDragHan
         }
         else
         {
-#if UNITY_EDITOR
-            isRemoveClassSphere = true;
-#else
             if (AdManager.Instance.IsRewardedAvailable())
             {
-                AdManager.OnRewardedAdRewardedEvent -= null;
-                AdManager.OnRewardedAdRewardedEvent += tag =>
-                {
-                    if(tag=="MainPanel"){
-                        ThreadManager.Instance.runOnMainThread(() =>
-                        {
-                            ThreadManager.Instance.runOnMainThread(() => { isRemoveClassSphere = true; });
-                        });
-                    }
-                 
-                };
-                AdManager.Instance.ShowRewardedWithTag("MainPannel");
+                AdManager.Instance.ShowRewardedWithTag("RemoveClassSphere");
             }
             else
             {
                 LogicMgr.GetInstance.GetLogic<LogicTips>().AddTips("Please try again later");
             }
-#endif
+        }
+    }
+    
+    private void OnEnable()
+    {
+        AdManager.OnRewardedAdRewardedEvent += OnRewardedAdRewarded;
+    }
+
+    private void OnDisable()
+    {
+        AdManager.OnRewardedAdRewardedEvent -= OnRewardedAdRewarded;
+    }
+
+    /// <summary>
+    ///  Rewarded Ad Successful.see
+    /// </summary>
+    private void OnRewardedAdRewarded(string watchVidoTag)
+    {
+        if (watchVidoTag == "RemoveClassSphere")
+        {
+            ThreadManager.Instance.runOnMainThread(() => { isRemoveClassSphere = true; });
+        }
+        else if (watchVidoTag == "CreatRed")
+        {
+            ThreadManager.Instance.runOnMainThread(() =>
+            {
+                if (m_Read != null)
+                {
+                    ObjectPool.Instance.DestorySpawn(m_Read.gameObject);
+                }
+                PanelMgr.GetInstance.ShowPanel(PanelName.RedBagPanel, RedBagPanel.INDEX_OPEN);
+            }); 
         }
     }
 

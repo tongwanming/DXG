@@ -139,10 +139,6 @@ public class RedBagPanel : PanelBase
                 refreshMoney();
                 break;
             case "Btn_open":
-#if UNITY_EDITOR
-                mCurrentIndex = INDEX_OPEN;
-                showResult();
-#elif UNITY_ANDROID
                 if (DataManager.getCurrentMoney() == 0)
                 {
                     mCurrentIndex = INDEX_OPEN;
@@ -152,18 +148,6 @@ public class RedBagPanel : PanelBase
                 {
                     if (AdManager.Instance.IsRewardedAvailable())
                     {
-                        AdManager.OnRewardedAdRewardedEvent -= null; 
-                        AdManager.OnRewardedAdRewardedEvent += tag =>
-                        {
-                            if(tag=="RedBagPanel"){
-                                ThreadManager.Instance.runOnMainThread(() =>
-                                {
-                                    mCurrentIndex = INDEX_OPEN;
-                                    showResult();
-                                });
-                            }
-                           
-                        };
                         AdManager.Instance.ShowRewardedWithTag("RedBagPanel");
                     }
                     else
@@ -171,8 +155,6 @@ public class RedBagPanel : PanelBase
                         LogicMgr.GetInstance.GetLogic<LogicTips>().AddTips("Please try again later");
                     }
                 }
-
-#endif
 
                 break;
             case "Btn_with_draw":
@@ -189,6 +171,31 @@ public class RedBagPanel : PanelBase
                 Close();
                 Config.Instance.CreatRed();
                 break;
+        }
+    }
+    
+    private void OnEnable()
+    {
+        AdManager.OnRewardedAdRewardedEvent += OnRewardedAdRewarded;
+    }
+
+    private void OnDisable()
+    {
+        AdManager.OnRewardedAdRewardedEvent -= OnRewardedAdRewarded;
+    }
+
+    /// <summary>
+    ///  Rewarded Ad Successful.see
+    /// </summary>
+    private void OnRewardedAdRewarded(string watchVidoTag)
+    {
+        if (watchVidoTag == "RedBagPanel")
+        {
+            ThreadManager.Instance.runOnMainThread(() =>
+            {
+                mCurrentIndex = INDEX_OPEN;
+                showResult();
+            });
         }
     }
 

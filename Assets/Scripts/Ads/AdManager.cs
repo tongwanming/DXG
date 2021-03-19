@@ -148,7 +148,11 @@ namespace Ads
         /// Checks if rewarded ad ready to show.
         public bool IsRewardedAvailable()
         {
+#if UNITY_EDITOR
+            return true;
+#else
             return IronSource.Agent.isRewardedVideoAvailable();
+#endif
         }
 
         /// Shows rewarded ad if loaded.
