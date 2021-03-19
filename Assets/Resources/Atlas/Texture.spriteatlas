@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Texture
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 9399965a1e558f240a8f1a6ccd032686, type: 3}
+    totalSpriteSurfaceArea: 551527
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 2bc581214ea104841b0b3ab1094adc70, type: 3}
+  - {fileID: 21300000, guid: 490ffe4344a69274e8c8e02abdef238f, type: 3}
+  - {fileID: 21300000, guid: 75de0d6597abd50478755f8df08a5fc0, type: 3}
+  - {fileID: 21300000, guid: 43979e279b79c4a478965e2dbd5f042d, type: 3}
+  - {fileID: 21300000, guid: b49128d9d6045324f88a72360169e661, type: 3}
+  - {fileID: 21300000, guid: dd3bbfab65c26c3469002a81c8a25cbb, type: 3}
+  - {fileID: 21300000, guid: 1eb229bcb5d394e41bee87bb4200794b, type: 3}
+  - {fileID: 21300000, guid: a39e0afc0597c034d8c79b0ee922d4ce, type: 3}
+  - {fileID: 21300000, guid: c7eb709d30efa504a81db6b730dba676, type: 3}
+  - {fileID: 21300000, guid: 80acb6bdd64d27548b2a33871c414084, type: 3}
+  - {fileID: 21300000, guid: c321241e0bf3e4f4d94a081efcc8cc03, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - 512
+  - 32
+  - 128
+  - 256
+  - 2048
+  - 2
+  - 64
+  - 4
+  - 8
+  - 1024
+  - 16
+  m_Tag: Texture
+  m_IsVariant: 0
