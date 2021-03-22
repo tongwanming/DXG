@@ -85,16 +85,6 @@ public class RestartPanel : PanelBase
         }
     }
 
-    public override void OnShowing()
-    {
-        base.OnShowing();
-    }
-
-    /// <summary>Update</summary>
-    private void Update()
-    {
-    }
-
     /// <summary>按钮点击事件</summary>
     protected override void OnClick(Transform target)
     {
@@ -106,19 +96,6 @@ public class RestartPanel : PanelBase
             case "Btn_Lose_Continue":
                 if (AdManager.Instance.IsRewardedAvailable())
                 {
-                    AdManager.OnRewardedAdRewardedEvent -= null;
-                    AdManager.OnRewardedAdRewardedEvent += tag =>
-                    {
-                        if (tag == "RestartPanel")
-                        {
-                            ThreadManager.Instance.runOnMainThread(() =>
-                                                   {
-                                                       Config.Instance.RetryEvent();
-                                                       Close();
-                                                   });
-                        }
-
-                    };
                     AdManager.Instance.ShowRewardedWithTag("RestartPanel");
                 }
                 else
@@ -132,6 +109,31 @@ public class RestartPanel : PanelBase
                 Close();
 
                 break;
+        }
+    }
+
+    private void OnEnable()
+    {
+        AdManager.OnRewardedAdRewardedEvent += OnRewardedAdRewarded;
+    }
+
+    private void OnDisable()
+    {
+        AdManager.OnRewardedAdRewardedEvent -= OnRewardedAdRewarded;
+    }
+
+    /// <summary>
+    ///  Rewarded Ad Successful.see
+    /// </summary>
+    private void OnRewardedAdRewarded(string watchVidoTag)
+    {
+        if (watchVidoTag == "RestartPanel")
+        {
+            ThreadManager.Instance.runOnMainThread(() =>
+            {
+                Config.Instance.RetryEvent();
+                Close();
+            });
         }
     }
 
