@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Linq;
 using System;
+using System.Globalization;
 
 public class iOSAgent : IronSourceIAgent
 {
@@ -34,6 +35,9 @@ public class iOSAgent : IronSourceIAgent
 
 	[DllImport("__Internal")]
 	private static extern void CFSetMetaDataWithValues (string key, params string[] values);
+
+	[DllImport("__Internal")]
+	private static extern string CFGetConversionValue();
 
 	//******************* SDK Init *******************//
 
@@ -149,6 +153,18 @@ public class iOSAgent : IronSourceIAgent
 	[DllImport("__Internal")]
 	private static extern void CFSetConsent(bool consent);
 
+	//******************* ConsentView API *******************//
+
+	[DllImport("__Internal")]
+	private static extern void CFLoadConsentViewWithType(string consentViewType);
+
+	[DllImport("__Internal")]
+	private static extern void CFShowConsentViewWithType(string consentViewType);
+
+	//******************* ILRD API *******************//
+
+	[DllImport("__Internal")]
+	private static extern void CFSetAdRevenueData(string dataSource, string impressionData);
 
 	public iOSAgent ()
 	{	
@@ -201,6 +217,18 @@ public class iOSAgent : IronSourceIAgent
 	public void setMetaData(string key, string value)
 	{
 	        CFSetMetaData(key, value);
+	}
+
+	public int? getConversionValue()
+	{
+		CultureInfo invCulture = CultureInfo.InvariantCulture;
+		int parsedInt;
+		if(int.TryParse(string.Format(invCulture, "{0}", CFGetConversionValue()), NumberStyles.Any, invCulture, out parsedInt))
+        {
+			return parsedInt;
+        }
+
+		return null;
 	}
 
 	//******************* SDK Init *******************//
@@ -404,6 +432,24 @@ public class iOSAgent : IronSourceIAgent
 		CFSetConsent(consent);
 	}
 
-#endregion
+	public void loadConsentViewWithType(string consentViewType)
+    {
+		CFLoadConsentViewWithType(consentViewType);
+	}
+
+	public void showConsentViewWithType(string consentViewType)
+	{
+		CFShowConsentViewWithType(consentViewType);
+	}
+
+	//******************* ILRD API *******************//
+
+	public void setAdRevenueData(string dataSource, Dictionary<string, string> impressionData)
+	{
+		string json = IronSourceJSON.Json.Serialize (impressionData);
+		CFSetAdRevenueData(dataSource, json);
+	}
+
+	#endregion
 }
 #endif

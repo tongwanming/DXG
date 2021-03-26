@@ -91,6 +91,9 @@ public class IronSourceDemoScript : MonoBehaviour
         IronSourceEvents.onBannerAdScreenPresentedEvent += BannerAdScreenPresentedEvent;
         IronSourceEvents.onBannerAdScreenDismissedEvent += BannerAdScreenDismissedEvent;
         IronSourceEvents.onBannerAdLeftApplicationEvent += BannerAdLeftApplicationEvent;
+
+        //Add ImpressionSuccess Event
+        IronSourceEvents.onImpressionSuccessEvent += ImpressionSuccessEvent;
     }
 
     void OnApplicationPause(bool isPaused)
@@ -110,7 +113,7 @@ public class IronSourceDemoScript : MonoBehaviour
 
 
         Rect showRewardedVideoButton = new Rect(0.10f * Screen.width, 0.15f * Screen.height, 0.80f * Screen.width, 0.08f * Screen.height);
-        if (GUI.Button(showRewardedVideoButton, "Show Rearded Video"))
+        if (GUI.Button(showRewardedVideoButton, "Show Rewarded Video"))
         {
             Debug.Log("unity-script: ShowRewardedVideoButtonClicked");
             if (IronSource.Agent.isRewardedVideoAvailable())
@@ -407,6 +410,16 @@ public class IronSourceDemoScript : MonoBehaviour
     {
         Debug.Log("I got OfferwallAvailableEvent, value = " + canShowOfferwal);
         
+    }
+
+    #endregion
+
+    #region ImpressionSuccess callback handler
+
+    void ImpressionSuccessEvent(IronSourceImpressionData impressionData)
+    {
+        Debug.Log("unity - script: I got ImpressionSuccessEvent ToString(): " + impressionData.ToString());
+        Debug.Log("unity - script: I got ImpressionSuccessEvent allData: " + impressionData.allData);
     }
 
     #endregion

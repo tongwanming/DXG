@@ -81,6 +81,12 @@ public class AndroidAgent : IronSourceIAgent
 		getBridge().Call("setMetaData", key, values);
 	}
 
+	public int? getConversionValue()
+    {
+		Debug.Log("Unsupported Platform");
+		return null;
+	}
+
 	//******************* SDK Init *******************//
 
 	public void setUserId(string userId) {
@@ -281,7 +287,27 @@ public class AndroidAgent : IronSourceIAgent
 		getBridge().Call("setConsent",consent);
 	}
 
-#endregion
+	//******************* ConsentView API *******************//
+
+	public void loadConsentViewWithType(string consentViewType)
+	{
+		Debug.Log("Unsupported Platform");
+	}
+
+	public void showConsentViewWithType(string consentViewType)
+	{
+		Debug.Log("Unsupported Platform");
+	}
+
+	//******************* ILRD API *******************//
+
+	public void setAdRevenueData(string dataSource, Dictionary<string, string> impressionData)
+	{
+		string json = IronSourceJSON.Json.Serialize(impressionData);
+		getBridge().Call("setAdRevenueData", dataSource, json);
+	}
+
+	#endregion
 }
 
 #endif

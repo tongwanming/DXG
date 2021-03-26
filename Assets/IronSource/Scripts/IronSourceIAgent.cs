@@ -22,6 +22,8 @@ public interface IronSourceIAgent
 
 	void setMetaData(string key, params string[] values);
 
+	int? getConversionValue();
+
 	//******************* SDK Init *******************//
 
 	void setUserId (string userId);
@@ -103,7 +105,24 @@ public interface IronSourceIAgent
 	void setSegment(IronSourceSegment segment);
 
 	void setConsent(bool consent);
+
+	//******************* ConsentView API *******************//
+
+	void loadConsentViewWithType(string consentViewType);
+
+	void showConsentViewWithType(string consentViewType);
+
+	//******************* ILRD API *******************//
+
+	void setAdRevenueData(string  dataSource, Dictionary<string, string> impressionData);
 }
+
+public static class dataSource
+{
+	public static string MOPUB { get { return "MoPub"; } }
+
+}
+
 
 public static class IronSourceAdUnits
 {

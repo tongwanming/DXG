@@ -6,11 +6,12 @@ using UnityEngine;
 
 public class IOperate : Singleton<IOperate>
 {
-#if UNITY_ANDROID
-    private string path = Application. persistentDataPath;
-#elif UNITY_STANDALONE_WIN 
-    private string path =Application.dataPath;
-#endif
+    string path;
+// #if UNITY_ANDROID
+//     private string path = Application. persistentDataPath;
+// #elif UNITY_STANDALONE_WIN 
+//     private string path =Application.dataPath;
+// #endif
 
 
     internal bool isExistsFile (string _name)

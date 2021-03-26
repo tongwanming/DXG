@@ -23,5 +23,13 @@
     public const string IMPRESSION_DATA_KEY_PRECISION = "precision";
     public const string IMPRESSION_DATA_KEY_LIFETIME_REVENUE = "lifetimeRevenue";
     public const string IMPRESSION_DATA_KEY_ENCRYPTED_CPM = "encryptedCPM";
+    public const string IMPRESSION_DATA_KEY_CONVERSION_VALUE= "conversionValue";
+    public const string GENDER_MALE = "male";
+    public const string GENDER_FEMALE = "female";
+    public const string GENDER_UNKNOWN = "unknown";
 
+    public const string IRONSOURCE_MEDIATION_SETTING_NAME = "IronSourceMediationSettings";
+    public const string IRONSOURCE_MEDIATED_NETWORK_SETTING_NAME = "IronSourceMediatedNetworkSettings";
+    public const string IRONSOURCE_RESOURCES_PATH = "Assets/IronSource/Resources";
+    public const string IRONSOURCE_SKAN_ID_KEY = "su67r6k2v3.skadnetwork";
 }

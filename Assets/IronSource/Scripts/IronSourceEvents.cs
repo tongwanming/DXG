@@ -1017,6 +1017,189 @@ public class IronSourceEvents : MonoBehaviour
 
     }
 
+    // ******************************* ConsentView Callbacks *******************************   
+
+    //iOS callbacks only - in order to prevent using macro for iOS it's not only iOS
+    private static event Action<string, IronSourceError> _onConsentViewDidFailToLoadWithErrorEvent;
+
+    public static event Action<string, IronSourceError> onConsentViewDidFailToLoadWithErrorEvent
+    {
+        add
+        {
+            if (_onConsentViewDidFailToLoadWithErrorEvent == null || !_onConsentViewDidFailToLoadWithErrorEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidFailToLoadWithErrorEvent += value;
+            }
+        }
+
+        remove
+        {
+            if (_onConsentViewDidFailToLoadWithErrorEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidFailToLoadWithErrorEvent -= value;
+            }
+        }
+    }
+
+    public void onConsentViewDidFailToLoadWithError(string args)
+    {
+        if (_onConsentViewDidFailToLoadWithErrorEvent != null && !String.IsNullOrEmpty(args))
+        {
+            List<object> argList = IronSourceJSON.Json.Deserialize(args) as List<object>;
+            IronSourceError err = getErrorFromErrorObject(argList[1]);
+            string consentViewType = argList[0].ToString();
+            _onConsentViewDidFailToLoadWithErrorEvent(consentViewType, err);
+        }
+    }
+
+    private static event Action<string, IronSourceError> _onConsentViewDidFailToShowWithErrorEvent;
+
+    public static event Action<string, IronSourceError> onConsentViewDidFailToShowWithErrorEvent
+    {
+        add
+        {
+            if (_onConsentViewDidFailToShowWithErrorEvent == null || !_onConsentViewDidFailToShowWithErrorEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidFailToShowWithErrorEvent += value;
+            }
+        }
+
+        remove
+        {
+            if (_onConsentViewDidFailToShowWithErrorEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidFailToShowWithErrorEvent -= value;
+            }
+        }
+    }
+
+    public void onConsentViewDidFailToShowWithError(string args)
+    {
+        if (_onConsentViewDidFailToShowWithErrorEvent != null && !String.IsNullOrEmpty(args))
+        {
+            List<object> argList = IronSourceJSON.Json.Deserialize(args) as List<object>;
+            IronSourceError err = getErrorFromErrorObject(argList[1]);
+            string consentViewType = argList[0].ToString();
+            _onConsentViewDidFailToShowWithErrorEvent(consentViewType, err);
+        }
+    }
+
+    private static event Action<string> _onConsentViewDidAcceptEvent;
+
+    public static event Action<string> onConsentViewDidAcceptEvent
+    {
+        add
+        {
+            if (_onConsentViewDidAcceptEvent == null || !_onConsentViewDidAcceptEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidAcceptEvent += value;
+            }
+        }
+
+        remove
+        {
+            if (_onConsentViewDidAcceptEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidAcceptEvent -= value;
+            }
+        }
+    }
+
+    public void onConsentViewDidAccept(string consentViewType)
+    {
+        if (_onConsentViewDidAcceptEvent != null)
+        {
+            _onConsentViewDidAcceptEvent(consentViewType);
+        }
+    }
+
+    private static event Action<string> _onConsentViewDidDismissEvent;
+
+    public static event Action<string> onConsentViewDidDismissEvent
+    {
+        add
+        {
+            if (_onConsentViewDidDismissEvent == null || !_onConsentViewDidDismissEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidDismissEvent += value;
+            }
+        }
+
+        remove
+        {
+            if (_onConsentViewDidDismissEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidDismissEvent -= value;
+            }
+        }
+    }
+
+    public void onConsentViewDidDismiss(string consentViewType)
+    {
+        if (_onConsentViewDidDismissEvent != null)
+        {
+            _onConsentViewDidDismissEvent(consentViewType);
+        }
+    }
+
+    private static event Action<string> _onConsentViewDidLoadSuccessEvent;
+
+    public static event Action<string> onConsentViewDidLoadSuccessEvent
+    {
+        add
+        {
+            if (_onConsentViewDidLoadSuccessEvent == null || !_onConsentViewDidLoadSuccessEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidLoadSuccessEvent += value;
+            }
+        }
+
+        remove
+        {
+            if (_onConsentViewDidLoadSuccessEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidLoadSuccessEvent -= value;
+            }
+        }
+    }
+
+    public void onConsentViewDidLoadSuccess(string consentViewType)
+    {
+        if (_onConsentViewDidLoadSuccessEvent != null)
+        {
+            _onConsentViewDidLoadSuccessEvent(consentViewType);
+        }
+    }
+
+    private static event Action<string> _onConsentViewDidShowSuccessEvent;
+
+    public static event Action<string> onConsentViewDidShowSuccessEvent
+    {
+        add
+        {
+            if (_onConsentViewDidShowSuccessEvent == null || !_onConsentViewDidShowSuccessEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidShowSuccessEvent += value;
+            }
+        }
+
+        remove
+        {
+            if (_onConsentViewDidShowSuccessEvent.GetInvocationList().Contains(value))
+            {
+                _onConsentViewDidShowSuccessEvent -= value;
+            }
+        }
+    }
+
+    public void onConsentViewDidShowSuccess(string consentViewType)
+    {
+        if (_onConsentViewDidShowSuccessEvent != null)
+        {
+            _onConsentViewDidShowSuccessEvent(consentViewType);
+        }
+    }
+
     // ******************************* Helper methods *******************************   
 
     private IronSourceError getErrorFromErrorObject (object descriptionObject)
