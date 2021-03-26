@@ -14,9 +14,9 @@ public class IronSourceDemoScript : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string appKey = "85460dcd";
+        string appKey = "ec7e5079";
 #elif UNITY_IPHONE
-        string appKey = "8545d445";
+        string appKey = "f12b7571";
 #else
         string appKey = "unexpected_platform";
 #endif

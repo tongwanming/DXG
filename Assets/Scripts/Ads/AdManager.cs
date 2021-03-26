@@ -36,9 +36,9 @@ namespace Ads
 #if UNITY_ANDROID
             string appKey = "ec7e5079";
 #elif UNITY_IPHONE
-            string appKey = "ec7e5079";
+            string appKey = "f12b7571";
 #else
-            string appKey = "ec7e5079";
+            string appKey = "f12b7571";
 #endif
 
 
