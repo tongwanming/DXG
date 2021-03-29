@@ -1,7 +1,7 @@
 <dependencies>
-    <unityversion>4.3.32</unityversion>
+    <unityversion>4.3.35</unityversion>
     <androidPackages>
-        <androidPackage spec="com.facebook.android:audience-network-sdk:6.2.0">
+        <androidPackage spec="com.facebook.android:audience-network-sdk:6.3.0">
             <repositories>
                 <repository>https://maven.google.com/</repository>
             </repositories>
@@ -9,7 +9,7 @@
     </androidPackages>
     
     <androidPackages>
-        <androidPackage spec="com.ironsource.adapters:facebookadapter:4.3.23">
+        <androidPackage spec="com.ironsource.adapters:facebookadapter:4.3.25">
             <repositories>
                 <repository>https://dl.bintray.com/ironsource-mobile/android-adapters/</repository>
             </repositories>
@@ -17,7 +17,7 @@
     </androidPackages>
 
   <iosPods>
-    <iosPod name="IronSourceFacebookAdapter" version="4.3.22.0">
+    <iosPod name="IronSourceFacebookAdapter" version="4.3.24.0">
       <sources>
         <source>https://github.com/CocoaPods/Specs</source>
       </sources>

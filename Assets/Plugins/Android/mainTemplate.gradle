@@ -32,10 +32,10 @@ allprojects {
             url "https://dl.bintray.com/ironsource-mobile/android-sdk/" // Assets/IronSource/Editor/IronSourceSDKDependencies.xml:9
         }
         maven {
-            url "https://maven.google.com/" // Assets/IronSource/Editor/IronSourceSDKDependencies.xml:17, Assets/IronSource/Editor/IronSourceSDKDependencies.xml:25, Assets/IronSource/Editor/ISFacebookAdapterDependencies.xml:8
+            url "https://maven.google.com/" // Assets/IronSource/Editor/IronSourceSDKDependencies.xml:17, Assets/IronSource/Editor/IronSourceSDKDependencies.xml:25, Assets/IronSource/Editor/ISAdMobAdapterDependencies.xml:8, Assets/IronSource/Editor/ISFacebookAdapterDependencies.xml:8
         }
         maven {
-            url "https://dl.bintray.com/ironsource-mobile/android-adapters/" // Assets/IronSource/Editor/ISFacebookAdapterDependencies.xml:16
+            url "https://dl.bintray.com/ironsource-mobile/android-adapters/" // Assets/IronSource/Editor/ISAdMobAdapterDependencies.xml:16, Assets/IronSource/Editor/ISFacebookAdapterDependencies.xml:16
         }
         mavenLocal()
         jcenter()
@@ -51,11 +51,13 @@ dependencies {
     implementation 'cn.thinkingdata.android:ThinkingAnalyticsSDK:2.5.4'
     implementation 'androidx.multidex:multidex:2.0.1'
 // Android Resolver Dependencies Start
-    implementation 'com.facebook.android:audience-network-sdk:6.2.0' // Assets/IronSource/Editor/ISFacebookAdapterDependencies.xml:8
+    implementation 'com.facebook.android:audience-network-sdk:6.3.0' // Assets/IronSource/Editor/ISFacebookAdapterDependencies.xml:8
+    implementation 'com.google.android.gms:play-services-ads:19.7.0' // Assets/IronSource/Editor/ISAdMobAdapterDependencies.xml:8
     implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0' // Assets/IronSource/Editor/IronSourceSDKDependencies.xml:17
     implementation 'com.google.android.gms:play-services-basement:17.2.1' // Assets/IronSource/Editor/IronSourceSDKDependencies.xml:25
-    implementation 'com.ironsource.adapters:facebookadapter:4.3.23' // Assets/IronSource/Editor/ISFacebookAdapterDependencies.xml:16
-    implementation 'com.ironsource.sdk:mediationsdk:7.0.3.1' // Assets/IronSource/Editor/IronSourceSDKDependencies.xml:9
+    implementation 'com.ironsource.adapters:admobadapter:4.3.17' // Assets/IronSource/Editor/ISAdMobAdapterDependencies.xml:16
+    implementation 'com.ironsource.adapters:facebookadapter:4.3.25' // Assets/IronSource/Editor/ISFacebookAdapterDependencies.xml:16
+    implementation 'com.ironsource.sdk:mediationsdk:7.1.4.1' // Assets/IronSource/Editor/IronSourceSDKDependencies.xml:9
 // Android Resolver Dependencies End
 **DEPS**}
 
